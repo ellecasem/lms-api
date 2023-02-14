@@ -8,5 +8,7 @@ namespace LmsApi.Models
         public String? Genre { get; set; }
         public int Quantity { get; set; }
         public String? ShelfLocation { get; set; }
+
+        public ICollection<History>? Histories { get; set; }
     }
 }
