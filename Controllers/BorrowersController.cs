@@ -13,33 +13,33 @@ namespace LmsApi.Controllers
     [ApiController]
     public class BorrowersController : ControllerBase
     {
-        private readonly LibraryContext _context;
+        private readonly LmsContext _context;
 
-        public BorrowersController(LibraryContext context)
+        public BorrowersController(LmsContext context)
         {
             _context = context;
         }
 
         // GET: api/Borrowers
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Borrower>>> GetBorrowers()
+        public async Task<ActionResult<IEnumerable<User>>> GetBorrowers()
         {
-          if (_context.Borrowers == null)
+          if (_context.Users == null)
           {
               return NotFound();
           }
-            return await _context.Borrowers.ToListAsync();
+            return await _context.Users.ToListAsync();
         }
 
         // GET: api/Borrowers/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Borrower>> GetBorrower(long id)
+        public async Task<ActionResult<User>> GetBorrower(long id)
         {
-          if (_context.Borrowers == null)
+          if (_context.Users == null)
           {
               return NotFound();
           }
-            var borrower = await _context.Borrowers.FindAsync(id);
+            var borrower = await _context.Users.FindAsync(id);
 
             if (borrower == null)
             {
@@ -52,7 +52,7 @@ namespace LmsApi.Controllers
         // PUT: api/Borrowers/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutBorrower(long id, Borrower borrower)
+        public async Task<IActionResult> PutBorrower(long id, User borrower)
         {
             if (id != borrower.Id)
             {
@@ -83,13 +83,13 @@ namespace LmsApi.Controllers
         // POST: api/Borrowers
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Borrower>> PostBorrower(Borrower borrower)
+        public async Task<ActionResult<User>> PostBorrower(User borrower)
         {
-          if (_context.Borrowers == null)
+          if (_context.Users == null)
           {
               return Problem("Entity set 'LibraryContext.Borrowers'  is null.");
           }
-            _context.Borrowers.Add(borrower);
+            _context.Users.Add(borrower);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetBorrower", new { id = borrower.Id }, borrower);
@@ -99,17 +99,17 @@ namespace LmsApi.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBorrower(long id)
         {
-            if (_context.Borrowers == null)
+            if (_context.Users == null)
             {
                 return NotFound();
             }
-            var borrower = await _context.Borrowers.FindAsync(id);
+            var borrower = await _context.Users.FindAsync(id);
             if (borrower == null)
             {
                 return NotFound();
             }
 
-            _context.Borrowers.Remove(borrower);
+            _context.Users.Remove(borrower);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -117,7 +117,7 @@ namespace LmsApi.Controllers
 
         private bool BorrowerExists(long id)
         {
-            return (_context.Borrowers?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Users?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

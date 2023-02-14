@@ -13,9 +13,9 @@ namespace LmsApi.Controllers
     [ApiController]
     public class HistoriesController : ControllerBase
     {
-        private readonly LibraryContext _context;
+        private readonly LmsContext _context;
 
-        public HistoriesController(LibraryContext context)
+        public HistoriesController(LmsContext context)
         {
             _context = context;
         }

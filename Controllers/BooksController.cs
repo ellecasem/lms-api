@@ -13,9 +13,9 @@ namespace LmsApi.Controllers
     [ApiController]
     public class BooksController : ControllerBase
     {
-        private readonly LibraryContext _context;
+        private readonly LmsContext _context;
 
-        public BooksController(LibraryContext context)
+        public BooksController(LmsContext context)
         {
             _context = context;
         }

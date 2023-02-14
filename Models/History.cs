@@ -10,6 +10,6 @@ namespace LmsApi.Models
         public DateTime? ActualReturnDate { get; set; }
 
         public Book Book { get; set; }
-        public Borrower Borrower { get; set; }
+        public User Borrower { get; set; }
     }
 }
