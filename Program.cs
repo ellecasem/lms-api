@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddDbContext<BookContext>(opt =>
     opt.UseInMemoryDatabase("BookList"));
-builder.Services.AddDbContext<LibraryContext>(opt =>
+builder.Services.AddDbContext<LmsContext>(opt =>
     opt.UseInMemoryDatabase("Library"));
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

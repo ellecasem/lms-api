@@ -2,21 +2,21 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LmsApi.Models
 {
-    public class LibraryContext : DbContext
+    public class LmsContext : DbContext
     {
-        public LibraryContext(DbContextOptions<LibraryContext> options)
+        public LmsContext(DbContextOptions<LmsContext> options)
             : base(options)
         {
         }
 
         public DbSet<Book> Books { get; set; } = null!;
-        public DbSet<Borrower> Borrowers { get; set; } = null!;
+        public DbSet<User> Users { get; set; } = null!;
         public DbSet<History> Histories { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Book>().ToTable("Book");
-            modelBuilder.Entity<Borrower>().ToTable("Borrower");
+            modelBuilder.Entity<User>().ToTable("User");
             modelBuilder.Entity<History>().ToTable("History");
         }
     }
