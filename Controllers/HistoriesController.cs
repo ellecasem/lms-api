@@ -11,55 +11,55 @@ namespace LmsApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BooksController : ControllerBase
+    public class HistoriesController : ControllerBase
     {
         private readonly LibraryContext _context;
 
-        public BooksController(LibraryContext context)
+        public HistoriesController(LibraryContext context)
         {
             _context = context;
         }
 
-        // GET: api/Books
+        // GET: api/Histories
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Book>>> GetBooks()
+        public async Task<ActionResult<IEnumerable<History>>> GetHistories()
         {
-          if (_context.Books == null)
+          if (_context.Histories == null)
           {
               return NotFound();
           }
-            return await _context.Books.ToListAsync();
+            return await _context.Histories.ToListAsync();
         }
 
-        // GET: api/Books/5
+        // GET: api/Histories/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Book>> GetBook(long id)
+        public async Task<ActionResult<History>> GetHistory(long id)
         {
-          if (_context.Books == null)
+          if (_context.Histories == null)
           {
               return NotFound();
           }
-            var book = await _context.Books.FindAsync(id);
+            var history = await _context.Histories.FindAsync(id);
 
-            if (book == null)
+            if (history == null)
             {
                 return NotFound();
             }
 
-            return book;
+            return history;
         }
 
-        // PUT: api/Books/5
+        // PUT: api/Histories/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutBook(long id, Book book)
+        public async Task<IActionResult> PutHistory(long id, History history)
         {
-            if (id != book.Id)
+            if (id != history.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(book).State = EntityState.Modified;
+            _context.Entry(history).State = EntityState.Modified;
 
             try
             {
@@ -67,7 +67,7 @@ namespace LmsApi.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!BookExists(id))
+                if (!HistoryExists(id))
                 {
                     return NotFound();
                 }
@@ -80,44 +80,44 @@ namespace LmsApi.Controllers
             return NoContent();
         }
 
-        // POST: api/Books
+        // POST: api/Histories
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Book>> PostBook(Book book)
+        public async Task<ActionResult<History>> PostHistory(History history)
         {
-          if (_context.Books == null)
+          if (_context.Histories == null)
           {
-              return Problem("Entity set 'LibraryContext.Books'  is null.");
+              return Problem("Entity set 'LibraryContext.Histories'  is null.");
           }
-            _context.Books.Add(book);
+            _context.Histories.Add(history);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetBook", new { id = book.Id }, book);
+            return CreatedAtAction("GetHistory", new { id = history.Id }, history);
         }
 
-        // DELETE: api/Books/5
+        // DELETE: api/Histories/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteBook(long id)
+        public async Task<IActionResult> DeleteHistory(long id)
         {
-            if (_context.Books == null)
+            if (_context.Histories == null)
             {
                 return NotFound();
             }
-            var book = await _context.Books.FindAsync(id);
-            if (book == null)
+            var history = await _context.Histories.FindAsync(id);
+            if (history == null)
             {
                 return NotFound();
             }
 
-            _context.Books.Remove(book);
+            _context.Histories.Remove(history);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool BookExists(long id)
+        private bool HistoryExists(long id)
         {
-            return (_context.Books?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Histories?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

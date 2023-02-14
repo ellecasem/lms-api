@@ -11,55 +11,55 @@ namespace LmsApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BooksController : ControllerBase
+    public class BorrowersController : ControllerBase
     {
         private readonly LibraryContext _context;
 
-        public BooksController(LibraryContext context)
+        public BorrowersController(LibraryContext context)
         {
             _context = context;
         }
 
-        // GET: api/Books
+        // GET: api/Borrowers
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Book>>> GetBooks()
+        public async Task<ActionResult<IEnumerable<Borrower>>> GetBorrowers()
         {
-          if (_context.Books == null)
+          if (_context.Borrowers == null)
           {
               return NotFound();
           }
-            return await _context.Books.ToListAsync();
+            return await _context.Borrowers.ToListAsync();
         }
 
-        // GET: api/Books/5
+        // GET: api/Borrowers/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Book>> GetBook(long id)
+        public async Task<ActionResult<Borrower>> GetBorrower(long id)
         {
-          if (_context.Books == null)
+          if (_context.Borrowers == null)
           {
               return NotFound();
           }
-            var book = await _context.Books.FindAsync(id);
+            var borrower = await _context.Borrowers.FindAsync(id);
 
-            if (book == null)
+            if (borrower == null)
             {
                 return NotFound();
             }
 
-            return book;
+            return borrower;
         }
 
-        // PUT: api/Books/5
+        // PUT: api/Borrowers/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutBook(long id, Book book)
+        public async Task<IActionResult> PutBorrower(long id, Borrower borrower)
         {
-            if (id != book.Id)
+            if (id != borrower.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(book).State = EntityState.Modified;
+            _context.Entry(borrower).State = EntityState.Modified;
 
             try
             {
@@ -67,7 +67,7 @@ namespace LmsApi.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!BookExists(id))
+                if (!BorrowerExists(id))
                 {
                     return NotFound();
                 }
@@ -80,44 +80,44 @@ namespace LmsApi.Controllers
             return NoContent();
         }
 
-        // POST: api/Books
+        // POST: api/Borrowers
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Book>> PostBook(Book book)
+        public async Task<ActionResult<Borrower>> PostBorrower(Borrower borrower)
         {
-          if (_context.Books == null)
+          if (_context.Borrowers == null)
           {
-              return Problem("Entity set 'LibraryContext.Books'  is null.");
+              return Problem("Entity set 'LibraryContext.Borrowers'  is null.");
           }
-            _context.Books.Add(book);
+            _context.Borrowers.Add(borrower);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetBook", new { id = book.Id }, book);
+            return CreatedAtAction("GetBorrower", new { id = borrower.Id }, borrower);
         }
 
-        // DELETE: api/Books/5
+        // DELETE: api/Borrowers/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteBook(long id)
+        public async Task<IActionResult> DeleteBorrower(long id)
         {
-            if (_context.Books == null)
+            if (_context.Borrowers == null)
             {
                 return NotFound();
             }
-            var book = await _context.Books.FindAsync(id);
-            if (book == null)
+            var borrower = await _context.Borrowers.FindAsync(id);
+            if (borrower == null)
             {
                 return NotFound();
             }
 
-            _context.Books.Remove(book);
+            _context.Borrowers.Remove(borrower);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool BookExists(long id)
+        private bool BorrowerExists(long id)
         {
-            return (_context.Books?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Borrowers?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
