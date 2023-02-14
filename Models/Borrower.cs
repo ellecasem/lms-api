@@ -6,5 +6,7 @@ namespace LmsApi.Models
         public String? FirstName { get; set; }
         public String? LastName { get; set; }
         public String? Email { get; set; }
+
+        public ICollection<History>? Histories { get; set; }
     }
 }
