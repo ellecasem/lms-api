@@ -13,6 +13,8 @@ namespace LmsApi.Models
         public DbSet<User> Users { get; set; } = null!;
         public DbSet<History> Histories { get; set; } = null!;
 
+        public DbSet<Role> Roles { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Book>().ToTable("Book");
