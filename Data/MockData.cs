@@ -42,6 +42,13 @@ namespace LmsApi.Data
 
             context.Books.AddRange(books);
 
+            var histories = new History[]
+            {
+                new History { Id = 1, BookId = 1, BorrowerId = 1, BorrowDate = DateTime.Now, ReturnDate = DateTime.Now.AddDays(1), ActualReturnDate = null }
+            };
+
+            context.Histories.AddRange(histories);
+
             context.SaveChanges();
         }
     }
