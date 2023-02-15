@@ -31,6 +31,17 @@ namespace LmsApi.Data
             };
 
             context.Users.AddRange(users);
+
+            var books = new Book[]
+            {
+                new Book { Id = 1, Name = "REST API Design Rulebook" , Author = "Mark Masse", Genre = "Computer Science", Quantity = 1, ShelfLocation = LmsApi.Models.ShelfLocation.Loc1 },
+                new Book { Id = 2, Name = "API Design Patterns", Author = "JJ Geewax", Genre = "Computer Science", Quantity = 2, ShelfLocation = LmsApi.Models.ShelfLocation.Loc2 },
+                new Book { Id = 3, Name = "APIs: A Strategy Guide", Author = "Brail-Jacobson-Woods", Genre = "Computer Science", Quantity = 3, ShelfLocation = LmsApi.Models.ShelfLocation.Loc3 },
+                new Book { Id = 4, Name = "RESTful Java Web Services", Author = "Jobinesh Purushothaman", Genre = "Computer Science", Quantity = 3, ShelfLocation = LmsApi.Models.ShelfLocation.Loc1 }
+            };
+
+            context.Books.AddRange(books);
+
             context.SaveChanges();
         }
     }
