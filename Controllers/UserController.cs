@@ -19,7 +19,7 @@ namespace LmsApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
-            var users = await _context.Users.Where(u => u.RoleId == 1 || u.RoleId == 2).ToListAsync();
+            var users = await _context.Users.ToListAsync();
             if (users == null)
             {
                 return NotFound();
